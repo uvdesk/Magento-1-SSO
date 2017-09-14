@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Sso
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<layout version="1.0.0">
+    <sso_sso_checked>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <action method="setHeaderTitle" translate="title" module="sso">
+                <title>Login Page</title>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="sso.login" template="sso/login.phtml"/>
+        </reference>
+    </sso_sso_checked>
+    <sso_sso_decide>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+            <action method="setHeaderTitle" translate="title" module="sso">
+                <title>Authorise Page</title>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="sso.login" template="sso/decide.phtml"/>
+        </reference>
+    </sso_sso_decide>
+</layout>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+    <name>Webkul_Sso</name>
+    <version>1.0.0</version>
+    <stability>stable</stability>
+    <license uri="https://store.webkul.com/license.html">Webkul license policy</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Provide a smooth way to your customers to login into your Support Portal. </summary>
+    <description>The customer can directly login from the Magento Front-end Panel with the same credentials which is used to log in the Magento front-end.&#xD;
+&#xD;
+Magento Social Sign On App integration is really easy. You have to select and enable the Sign On and then your customers are ready to login into your UVdesk Support Portal via the Magento Store Account Access.</description>
+    <notes>Client can login to third party application using client's Magento credentials.&#xD;
+Admin can register the client from admin panel.</notes>
+    <authors><author><name>Webkul Software</name><user>webkul</user><email>support@webkul.com</email></author></authors>
+    <date>2017-09-09</date>
+    <time>11:29:49</time>
+    <contents><target name="magelocal"><dir name="Webkul"><dir name="Sso"><dir name="Block"><dir name="Adminhtml"><dir name="Sso"><dir name="Edit"><file name="Form.php" hash="9b93f4eb2df64c18ade61af150951b9f"/><dir name="Tab"><file name="Main.php" hash="7cf3ecbeb95b70a674c175e03ee8f36c"/></dir><file name="Tabs.php" hash="8e4b04115d8e3251daae6b27414aa770"/></dir><file name="Edit.php" hash="c40d93b0f24b70d23e155c9b4af4d13e"/><file name="Grid.php" hash="51636bdb061fd00c0f0869df320ecc15"/></dir><file name="Sso.php" hash="26faee64fb1ef7ade3eb6a6fcf19af36"/></dir></dir><dir name="Helper"><file name="Data.php" hash="8abc736fafa319a2e623ad2b992d294b"/></dir><dir name="Model"><dir name="Resource"><dir name="Sso"><file name="Collection.php" hash="0ad9e5fd481be012445c020711ba8c9c"/></dir><file name="Sso.php" hash="15309cfcae773c5a0b6ff338e047ded2"/><dir name="Ssoauth"><file name="Collection.php" hash="91019ca928328cf7cb5dd9899c3713c9"/></dir><file name="Ssoauth.php" hash="9bdd6f999b3bf3ce8f5f28cb37842e62"/></dir><file name="Sso.php" hash="f7f674559dadac969bb0adee26be7723"/><file name="Ssoauth.php" hash="5c2f8d984ca73971cca7d79ed153c9bc"/></dir><dir name="controllers"><dir name="Adminhtml"><file name="SsoController.php" hash="1b4df947f6460a7afc4d803abaafaac4"/></dir><file name="SsoController.php" hash="cefe920d7e2de5842dd41999e92e5945"/></dir><dir name="etc"><file name="adminhtml.xml" hash="d2de176fe2acc2097d80406f2b204dd0"/><file name="config.xml" hash="da214c484a1a5a44022976e24c0723fe"/></dir><dir name="sql"><dir name="sso_setup"><file name="mysql4-install-0.1.0.php" hash="791e1cc6f7d7ef203be182398d173dda"/></dir></dir></dir></dir></target><target name="magedesign"><dir name="adminhtml"><dir name="default"><dir name="default"><dir name="layout"><file name="sso.xml" hash="9e53c76447b17e3281a408fb39c91b1a"/></dir></dir></dir></dir><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="sso.xml" hash="9d91801512b57d03e8ce224247da5b42"/></dir><dir name="template"><dir name="sso"><file name="decide.phtml" hash="7e0692b11618aaadfb76cb9d37517455"/><file name="login.phtml" hash="29f65361e21551acd6c70a8bfa3b4293"/></dir></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="Webkul_Sso.xml" hash="b6b76c9ff39f9cee7eedd16fee3b7f86"/></dir></target><target name="magelib"><dir name="Firebase"><dir name="JWT"><file name="BeforeValidException.php" hash="24585a8f85d5348a35064e279202bd99"/><file name="ExpiredException.php" hash="95008b55188b553d3fa70af401f7536b"/><file name="JWT.php" hash="269cc0dce5155fd76ac445271847f31b"/><file name="SignatureInvalidException.php" hash="ea53ca7298947a62d250cd89861fc487"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.4.0</min><max>7.0.13</max></php></required></dependencies>
+</package>

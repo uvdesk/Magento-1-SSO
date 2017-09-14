@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Sso
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<layout version="1.0.0">
+    <adminhtml_sso_index>
+        <reference name="content">
+            <block type="sso/adminhtml_sso" name="sso"/>
+        </reference>
+    </adminhtml_sso_index>
+    <adminhtml_sso_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="sso/adminhtml_sso_edit" name="sso_edit" />
+        </reference>
+        <reference name="left">
+            <block type="sso/adminhtml_sso_edit_tabs" name="sso_edit_tabs">
+                <block type="sso/adminhtml_sso_edit_tab_main" name="sso_edit_tab_main" />
+                <action method="addTab">
+                    <name>main_section</name>
+                    <block>sso_edit_tab_main</block>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_sso_edit>
+    <adminhtml_sso_new>
+        <update handle="adminhtml_sso_edit" />
+    </adminhtml_sso_new>
+    <adminhtml_sso_grid>
+        <block type="sso/adminhtml_sso_grid" name="root"/>
+    </adminhtml_sso_grid>
+</layout>

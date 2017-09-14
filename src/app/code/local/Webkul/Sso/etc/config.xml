@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Sso
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config>
+    <modules>
+        <Webkul_Sso>
+            <version>1.0.0</version>
+        </Webkul_Sso>
+    </modules>
+    <frontend>
+        <routers>
+            <sso>
+                <use>standard</use>
+                <args>
+                    <module>Webkul_Sso</module>
+                    <frontName>sso</frontName>
+                </args>
+            </sso>
+        </routers>
+        <layout>
+            <updates>
+                <sso>
+                    <file>sso.xml</file>
+                </sso>
+            </updates>
+        </layout>
+    </frontend>
+    <global>
+        <models>
+            <sso>
+                <class>Webkul_Sso_Model</class>
+                <resourceModel>sso_resource</resourceModel>
+            </sso>
+            <sso_resource>
+                <class>Webkul_Sso_Model_Resource</class>
+                <entities>
+                    <sso>
+                        <table>sso</table>
+                    </sso>
+                    <ssoauth>
+                        <table>ssoauth</table>
+                    </ssoauth>
+                </entities>
+            </sso_resource>
+        </models>
+        <resources>
+            <sso_setup>
+                <setup>
+                    <module>Webkul_Sso</module>
+                </setup>
+            </sso_setup>
+        </resources>
+        <blocks>
+            <sso>
+                <class>Webkul_Sso_Block</class>
+            </sso>
+        </blocks>
+        <helpers>
+            <sso>
+                <class>Webkul_Sso_Helper</class>
+            </sso>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <webkul_sso before="Mage_Adminhtml">Webkul_Sso_Adminhtml</webkul_sso>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <adminhtml>
+        <layout>
+            <updates>
+                <sso>
+                    <file>sso.xml</file>
+                </sso>
+            </updates>
+        </layout>
+    </adminhtml>
+    
+</config>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_Sso
+ * @author    Webkul
+ * @copyright Copyright (c) 2010-2017 Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+ -->
+<config>
+    <menu>
+        <sso>
+            <title>SSO</title>
+            <sort_order>100</sort_order>
+            <children>
+                <sso>
+                    <title>Add/Manage Sso</title>
+                    <sort_order>100</sort_order>
+                    <action>adminhtml/sso/</action>
+                </sso>
+            </children>
+        </sso>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <sso>
+                        <title>SSO</title>
+                        <sort_order>65</sort_order>
+                        <children>
+                            <sso translate="title" module="sso">
+                                <title>Sso Management</title>
+                                <sort_order>50</sort_order>
+                            </sso>
+                        </children>
+                    </sso>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
