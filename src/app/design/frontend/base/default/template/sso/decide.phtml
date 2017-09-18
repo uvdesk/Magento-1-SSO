@@ -10,10 +10,13 @@
  */
 ?>
 <div style="text-align: center;padding:13px;margin:auto;width:35%">
-    <a href="<?php echo Mage::getUrl('sso/sso/auth'); ?>">
-        <button name="authorization" value="true" style="width:146px;height: 40px;float:left;">Authorize</button>
-    </a>
-    <a href="<?php echo Mage::getUrl('sso/sso/cancel'); ?>"><button name="cancel" value="true" style="width:146px;height: 40px;float:right;"> 
+    <button onclick="wkSsoAction(this)" name="authorization" data-action="<?php echo Mage::getUrl('sso/sso/auth'); ?>" value="true" style="width:146px;height: 40px;float:left;">Authorize</button>
+    <button onclick="wkSsoAction(this)" name="cancel" data-action="<?php echo Mage::getUrl('sso/sso/cancel'); ?>" value="true" style="width:146px;height: 40px;float:right;"> 
         Cancel</button>
-    </a>
 </div>
+<script>
+    function wkSsoAction(button){
+        var url=button.getAttribute("data-action");
+        window.location.replace(url);
+    }
+</script>

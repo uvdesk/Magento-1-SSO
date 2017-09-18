@@ -108,7 +108,7 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
         $model->setIpAddress($ipAddress);
         $model->save();
         $redirectPath   = Mage::getSingleton("core/session")->getRedirectUri();
-        $redirectPath=parse_url($url, PHP_URL_SCHEME) === null ? "http://" . $redirectPath : $redirectPathurl;
+        $redirectPath=parse_url($redirectPath, PHP_URL_SCHEME) === null ? "http://" . $redirectPath : $redirectPath;
         $redirectPath.="?auth_code=".$token."&client_id=".Mage::getSingleton("core/session")->getSsoClientId();
         Mage::app()->getResponse()->setRedirect($redirectPath)
                                     ->sendResponse();
@@ -151,6 +151,28 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
             }
         } else {
             $response['error'] = "Invalid client id token provided";
+        }
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(json_encode(['response' => $response]));
+    }
+
+    public function verifyAction(){
+        $response = [];
+        $data = $this->getRequest()->getParams();
+        $clientId = $data['client_id'];
+        $ssoModel = Mage::getModel('sso/sso');    
+        $ssoModel->load($clientId, "client_id");  
+        if ($ssoModel->getId()) {
+            $secretKey = $data['secret_key'];
+            if ($secretKey == $ssoModel->getSecretKey()){
+                $response['success'] = true;
+            } else {
+                $response['success'] = false;
+                $response['message'] = "Invalid credentials";
+            }
+        } else {
+            $response['success'] = false;
+            $response['message'] = "Invalid credentials";
         }
         $this->getResponse()->setHeader('Content-type', 'application/json');
         $this->getResponse()->setBody(json_encode(['response' => $response]));

@@ -40,16 +40,6 @@ class Webkul_Sso_Block_Adminhtml_Sso_Grid extends Mage_Adminhtml_Block_Widget_Gr
             "index"     => "name"
         ));
 
-        $this->addColumn("url", array(
-            "header"    => $this->__("Url"),
-            "index"     => "url"
-        ));
-
-        $this->addColumn("email", array(
-            "header"    => $this->__("Email"),
-            "index"     => "email"
-        ));
-
         $this->addColumn("client_id", array(
             "header"    => $this->__("Client Id"),
             "index"     => "client_id"

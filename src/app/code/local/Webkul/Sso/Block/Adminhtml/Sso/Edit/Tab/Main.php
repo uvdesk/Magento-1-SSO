@@ -37,27 +37,13 @@ class Webkul_Sso_Block_Adminhtml_Sso_Edit_Tab_Main extends Mage_Adminhtml_Block_
             'required' => true,
         ));
 
-        $fieldset->addField('url', 'text', array(
-            'name'     => 'url',
-            'class'    => 'validate-url',
-            'label'    => Mage::helper('sso')->__('Url'),
-            'title'    => Mage::helper('sso')->__('Url'),
-            'required' => true,
-        ));
-
-        $fieldset->addField('email', 'text', array(
-            'name'     => 'email',
-            'class'    => 'validate-email',
-            'label'    => Mage::helper('sso')->__('Email'),
-            'title'    => Mage::helper('sso')->__('Email'),
-            'required' => true,
-        ));
 
         $fieldset->addField('client_id', 'text', array(
             'name'     => 'client_id',
             'label'    => Mage::helper('sso')->__('Client Id'),
             'title'    => Mage::helper('sso')->__('Client Id'),
             'disabled' => true,
+            'style'    => 'background-color:#efefef'
         ));
 
         $fieldset->addField('secret_key', 'text', array(
@@ -65,6 +51,7 @@ class Webkul_Sso_Block_Adminhtml_Sso_Edit_Tab_Main extends Mage_Adminhtml_Block_
             'label'    => Mage::helper('sso')->__('Secret Key'),
             'title'    => Mage::helper('sso')->__('Secret Key'),
             'disabled' => true,
+            'style'    => 'background-color:#efefef'
         ));
 
         $form->setValues($model->getData());

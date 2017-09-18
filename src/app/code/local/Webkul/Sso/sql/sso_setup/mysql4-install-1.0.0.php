@@ -14,8 +14,6 @@ $installer->run("
 CREATE TABLE IF NOT EXISTS {$this->getTable('sso')} (
 	`id` int(11) unsigned NOT NULL auto_increment,
 	`name` text NOT NULL,
-	`url` text NOT NULL,
-    `email` text NOT NULL,
 	`client_id` text NOT NULL,
 	`secret_key` text NOT NULL,
 	PRIMARY KEY (`id`)
