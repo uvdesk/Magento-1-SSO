@@ -22,25 +22,29 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
                 Mage::getSingleton("core/session")->setSsoClientId(false);
                 Mage::getSingleton("core/session")->addError("Invalid redirect URI");
             } else {
-                Mage::getSingleton("core/session")->addSuccess("Authorised client");
                 Mage::getSingleton("core/session")->setSsoClientId($clientId);
                 Mage::getSingleton("core/session")->setRedirectUri($redirectUri);
             }
         } else {
             Mage::getSingleton("core/session")->setSsoClientId(false);
-            Mage::getSingleton("core/session")->addError("Unauthorised client");
+            $redirectPath   = '/index.php';
         }
-        $redirectPath   = '*/*/checked';
+        if(!$redirectPath){
+            $redirectPath   = '*/*/checked';
+        }
         $this->_redirect($redirectPath);
     }
 
     public function checkedAction()
     {
+        if (!Mage::getSingleton("core/session")->getSsoClientId()) {
+            $redirectPath   = '*/*/index';
+            $this->_redirect($redirectPath);
+        }
         if (Mage::getSingleton('customer/session')->isLoggedIn() && Mage::getSingleton("core/session")->getSsoClientId()!= false) {
             $redirectPath   = '*/*/decide';
             $this->_redirect($redirectPath);
         }
-        
         $this->loadLayout()->renderLayout();
     }
     public function loginAction()
@@ -83,8 +87,12 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
             $redirectPath   = '*/*/checked';
             $this->_redirect($redirectPath);
         }
+        $clientId=Mage::getSingleton("core/session")->getSsoClientId();
+        $ssoModel = Mage::getModel('sso/sso');
+        $ssoModel->load($clientId, "client_id");
+        $client= $ssoModel->getName();
         $customer = Mage::getSingleton('customer/session')->getCustomer();
-        Mage::getSingleton("core/session")->addSuccess("Logged in as ".$customer->getName());
+        Mage::getSingleton("core/session")->addNotice($client." will receive your basic profile info.");
         $this->loadLayout()->renderLayout();
     }
 
@@ -110,14 +118,35 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
         $redirectPath   = Mage::getSingleton("core/session")->getRedirectUri();
         $redirectPath=parse_url($redirectPath, PHP_URL_SCHEME) === null ? "http://" . $redirectPath : $redirectPath;
         $redirectPath.="?auth_code=".$token."&client_id=".Mage::getSingleton("core/session")->getSsoClientId();
+        Mage::getSingleton("core/session")->setSsoClientId(false);        
         Mage::app()->getResponse()->setRedirect($redirectPath)
                                     ->sendResponse();
     }
 
     public function cancelAction()
     {
-        $redirectPath   = '/index';
-        $this->_redirect($redirectPath);
+        if (!Mage::getSingleton("core/session")->getSsoClientId()) {
+            $redirectPath   = '*/*/index';
+            $this->_redirect($redirectPath);
+        }
+        if (!Mage::getSingleton('customer/session')->isLoggedIn()) {
+            $redirectPath   = '*/*/checked';
+            $this->_redirect($redirectPath);
+        }
+        $clientId=Mage::getSingleton("core/session")->getSsoClientId();
+        Mage::getSingleton("core/session")->setSsoClientId(false);
+        $ssoModel = Mage::getModel('sso/sso');
+        $ssoModel->load($clientId, "client_id");
+        if ($ssoModel->getCancelUrl()!=null) {
+            $cancelUrl=$ssoModel->getCancelUrl();
+            $redirectPath   = $cancelUrl;
+            $redirectPath=parse_url($redirectPath, PHP_URL_SCHEME) === null ? "http://" . $redirectPath : $redirectPath;
+            Mage::app()->getResponse()->setRedirect($redirectPath)
+                                    ->sendResponse();
+        } else {
+            $redirectPath   = '/index';
+            $this->_redirect($redirectPath);
+        }
     }
 
     public function responseAction()
@@ -156,15 +185,16 @@ class Webkul_Sso_SsoController extends Mage_Core_Controller_Front_Action
         $this->getResponse()->setBody(json_encode(['response' => $response]));
     }
 
-    public function verifyAction(){
+    public function verifyAction()
+    {
         $response = [];
         $data = $this->getRequest()->getParams();
         $clientId = $data['client_id'];
-        $ssoModel = Mage::getModel('sso/sso');    
-        $ssoModel->load($clientId, "client_id");  
+        $ssoModel = Mage::getModel('sso/sso');
+        $ssoModel->load($clientId, "client_id");
         if ($ssoModel->getId()) {
             $secretKey = $data['secret_key'];
-            if ($secretKey == $ssoModel->getSecretKey()){
+            if ($secretKey == $ssoModel->getSecretKey()) {
                 $response['success'] = true;
             } else {
                 $response['success'] = false;

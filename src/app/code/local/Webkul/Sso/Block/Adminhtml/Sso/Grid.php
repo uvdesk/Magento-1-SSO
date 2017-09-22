@@ -40,6 +40,11 @@ class Webkul_Sso_Block_Adminhtml_Sso_Grid extends Mage_Adminhtml_Block_Widget_Gr
             "index"     => "name"
         ));
 
+        $this->addColumn("cancel_url", array(
+            "header"    => $this->__("Cancel Url"),
+            "index"     => "cancel_url"
+        ));
+
         $this->addColumn("client_id", array(
             "header"    => $this->__("Client Id"),
             "index"     => "client_id"

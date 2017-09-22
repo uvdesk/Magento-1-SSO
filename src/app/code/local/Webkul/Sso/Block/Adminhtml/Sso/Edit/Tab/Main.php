@@ -37,6 +37,12 @@ class Webkul_Sso_Block_Adminhtml_Sso_Edit_Tab_Main extends Mage_Adminhtml_Block_
             'required' => true,
         ));
 
+         $fieldset->addField('cancel_url', 'text', array(
+            'name'     => 'cancel_url',
+            'class'    => 'validate-url',
+            'label'    => Mage::helper('sso')->__('Cancel Url'),
+            'title'    => Mage::helper('sso')->__('Cancel Url'),
+        ));
 
         $fieldset->addField('client_id', 'text', array(
             'name'     => 'client_id',
